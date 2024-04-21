@@ -38,3 +38,21 @@ class ChatDynamoDBRepo:
                 err.response["Error"]["Message"],
             )
             raise
+
+    def update_language_preference(self, chat_id, language_preference):
+        try:
+            log.info(f"Updating language preference for chat_id {chat_id}")
+            self.table.update_item(
+                Key={"chat_id": chat_id},
+                UpdateExpression="set language_preference = :l",
+                ExpressionAttributeValues={":l": language_preference},
+                ReturnValues="UPDATED_NEW",
+            )
+        except ClientError as err:
+            log.error(
+                "Couldn't update language preference for chat_id %s. Here's why: %s: %s",
+                chat_id,
+                err.response["Error"]["Code"],
+                err.response["Error"]["Message"],
+            )
+            raise

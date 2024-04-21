@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+import json
 
 class Message(BaseModel):
     message_id: str = None
@@ -10,5 +11,8 @@ class Message(BaseModel):
     timestamp: str = ''
     translated_text: str = ''
     translated_audio_file_location: str = ''
-    original_language: str = ''
+    original_language: str = '' # comes in UI message
+    recipient_preferred_language: str = '' # comes in UI message
     status: str = ''
+
+

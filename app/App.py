@@ -1,5 +1,11 @@
 import uvicorn
+import logging
 from fastapi import FastAPI
+from fastapi.logger import logger as fastapi_logger
+
+logging.basicConfig(level=logging.DEBUG)
+fastapi_logger.setLevel(logging.DEBUG)
+
 
 from app.api.chat_api import chat_api_router
 from app.api.message_api import message_api_router
